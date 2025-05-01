@@ -1,5 +1,6 @@
 package pe.cibertec.proy_sistema_almacen.service;
 
+import pe.cibertec.proy_sistema_almacen.dto.LoginResponseDto;
 import pe.cibertec.proy_sistema_almacen.dto.UsuariosCrearDto;
 import pe.cibertec.proy_sistema_almacen.dto.UsuariosListarDto;
 
@@ -26,5 +27,7 @@ public interface MaintenanceUsuariosService {
     boolean actualizarUsuario(UsuariosCrearDto usuariosCrearDto) throws Exception;
 
     boolean borrarUsuarioId(int id) throws Exception;
+
+    Optional<LoginResponseDto> loginUsuario(String usuario, String contrasenia);
 
 }

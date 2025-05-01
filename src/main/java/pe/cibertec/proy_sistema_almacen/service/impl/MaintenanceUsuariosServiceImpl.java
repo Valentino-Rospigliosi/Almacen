@@ -2,6 +2,7 @@ package pe.cibertec.proy_sistema_almacen.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pe.cibertec.proy_sistema_almacen.dto.LoginResponseDto;
 import pe.cibertec.proy_sistema_almacen.dto.UsuariosCrearDto;
 import pe.cibertec.proy_sistema_almacen.dto.UsuariosListarDto;
 import pe.cibertec.proy_sistema_almacen.entity.Usuarios;
@@ -104,6 +105,23 @@ public class MaintenanceUsuariosServiceImpl implements MaintenanceUsuariosServic
             return true;
         }).orElse(false);
 
+    }
+
+    @Override
+    public Optional<LoginResponseDto> loginUsuario(String usuario, String contrasenia) {
+        Optional<Usuarios> usuarioOpt = usuariosRepository.loginUsuario(usuario, contrasenia);
+
+        if (usuarioOpt.isPresent()) {
+            Usuarios u = usuarioOpt.get();
+            LoginResponseDto dto = new LoginResponseDto(
+                    u.getNombreUsuario(),
+                    u.getCorreo(),
+                    u.getRol()  // ajusta según tu modelo de Rol
+            );
+            return Optional.of(dto);
+        }
+
+        return Optional.empty();
     }
 
 }
