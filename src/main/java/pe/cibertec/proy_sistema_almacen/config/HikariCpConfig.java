@@ -35,7 +35,7 @@ public class HikariCpConfig {
          * Configurar propiedades del pool de HikariCP
          * - MaximumPoolSize: Máximo # de conexiones del pool.
          * - MinimumIdle: Mínimo # de conexiones inactivas del pool.
-         * - IdleTimeout: Tiempo máximo de espera para
+         * - IdleTimeout: Tiempo máximo de esperza para
          *      eliminar una conexión inactiva.
          * - ConnectionTimeout: Tiempo máximo de espera
          *      para conectarse a la BD.
