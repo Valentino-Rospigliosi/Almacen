@@ -7,7 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.util.List;
 
-@Entity(name = "pedido")
+@Entity(name = "pedidos")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
