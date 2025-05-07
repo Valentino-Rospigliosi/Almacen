@@ -11,7 +11,7 @@ import pe.cibertec.proy_sistema_almacen.dto.ProveedorListarDto;
 import pe.cibertec.proy_sistema_almacen.service.MaintenanceProductoService;
 
 import java.util.List;
-
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/api/productos")
 @RequiredArgsConstructor

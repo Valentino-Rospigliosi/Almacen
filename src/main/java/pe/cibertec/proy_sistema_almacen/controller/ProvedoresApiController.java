@@ -11,7 +11,7 @@ import pe.cibertec.proy_sistema_almacen.service.MaintenanceProveedoresService;
 
 import java.util.List;
 import java.util.Optional;
-
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/api/proveedores")
 public class ProvedoresApiController {
