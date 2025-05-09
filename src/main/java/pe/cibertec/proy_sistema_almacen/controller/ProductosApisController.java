@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.cibertec.proy_sistema_almacen.dto.ProductoCrearDto;
 import pe.cibertec.proy_sistema_almacen.dto.ProductoListarDto;
-import pe.cibertec.proy_sistema_almacen.dto.ProveedorListarDto;
 import pe.cibertec.proy_sistema_almacen.service.MaintenanceProductoService;
 
 import java.util.List;

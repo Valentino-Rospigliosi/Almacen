@@ -114,6 +114,7 @@ public class MaintenanceUsuariosServiceImpl implements MaintenanceUsuariosServic
         if (usuarioOpt.isPresent()) {
             Usuarios u = usuarioOpt.get();
             LoginResponseDto dto = new LoginResponseDto(
+                    u.getIdUsuario(),
                     u.getNombreUsuario(),
                     u.getCorreo(),
                     u.getRol()  // ajusta según tu modelo de Rol

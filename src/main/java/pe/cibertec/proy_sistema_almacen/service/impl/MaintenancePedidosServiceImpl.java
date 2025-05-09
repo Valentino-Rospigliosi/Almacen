@@ -1,6 +1,9 @@
 package pe.cibertec.proy_sistema_almacen.service.impl;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pe.cibertec.proy_sistema_almacen.dto.PedidoCrearDto;
 import pe.cibertec.proy_sistema_almacen.dto.PedidoListarDto;
@@ -16,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Transactional
 @Service
 public class MaintenancePedidosServiceImpl implements MaintenancePedidosService {
 
@@ -34,9 +38,11 @@ public class MaintenancePedidosServiceImpl implements MaintenancePedidosService 
         pedidoRepository.findAll().forEach(p -> dtos.add(new PedidoListarDto(
                 p.getIdPedido(),
                 p.getProveedor().getNombreProveedor(),
+                p.getProveedor().getIdProveedor(),
                 p.getFechaRecepcion(),
                 p.getEstado(),
                 p.getObservacion(),
+                p.getUsuario().getIdUsuario(),
                 p.getUsuario().getNombreUsuario()
         )));
         return dtos;
@@ -47,17 +53,22 @@ public class MaintenancePedidosServiceImpl implements MaintenancePedidosService 
         return pedidoRepository.findById(id).map(p -> new PedidoListarDto(
                 p.getIdPedido(),
                 p.getProveedor().getNombreProveedor(),
+                p.getProveedor().getIdProveedor(),
                 p.getFechaRecepcion(),
                 p.getEstado(),
                 p.getObservacion(),
+                p.getUsuario().getIdUsuario(),
                 p.getUsuario().getNombreUsuario()
         ));
     }
 
+    @Transactional
     @Override
     public boolean agregarPedido(PedidoCrearDto dto) {
         Optional<Proveedores> proveedorOpt = proveedoresRepository.findById(dto.idProveedor());
         Optional<Usuarios> usuarioOpt = usuariosRepository.findById(dto.idUsuario());
+
+        System.out.println("Guardando pedido: recien guardar" );
 
         if (proveedorOpt.isPresent() && usuarioOpt.isPresent()) {
             Pedido pedido = new Pedido(
@@ -68,6 +79,7 @@ public class MaintenancePedidosServiceImpl implements MaintenancePedidosService 
                     dto.observacion(),
                     usuarioOpt.get()
             );
+            System.out.println("Guardando pedido: " + pedido);
             pedidoRepository.save(pedido);
             return true;
         }
@@ -103,4 +115,20 @@ public class MaintenancePedidosServiceImpl implements MaintenancePedidosService 
             return true;
         }).orElse(false);
     }
+
+    @Override
+    public Page<PedidoListarDto> listarPedidosPaginados(Pageable pageable) throws Exception {
+        return pedidoRepository.findAll(pageable)
+                .map(p -> new PedidoListarDto(
+                        p.getIdPedido(),
+                        p.getProveedor().getNombreProveedor(),
+                        p.getProveedor().getIdProveedor(),
+                        p.getFechaRecepcion(),
+                        p.getEstado(),
+                        p.getObservacion(),
+                        p.getUsuario().getIdUsuario(),
+                        p.getUsuario().getNombreUsuario()
+                ));
+    }
+
 }

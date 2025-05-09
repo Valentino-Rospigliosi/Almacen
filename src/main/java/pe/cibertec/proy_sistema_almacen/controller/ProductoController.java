@@ -33,7 +33,7 @@ public class ProductoController {
 
     @GetMapping("/registrar")
     public String mostrarFormularioRegistro(Model model) {
-        model.addAttribute("producto", new ProductoCrearDto(null, "", "", 0, 0, "Activo"));
+        model.addAttribute("producto", new ProductoCrearDto(null, "", "", 0, 0, "Activo",0));
         return "productos-crear";
     }
 
@@ -50,7 +50,7 @@ public class ProductoController {
             Producto p = optional.get();
             model.addAttribute("producto", new ProductoCrearDto(
                     p.getIdProducto(), p.getNombreProducto(), p.getDescripcion(),
-                    p.getStockActual(), p.getStockMinimo(), p.getEstado()
+                    p.getStockActual(), p.getStockMinimo(), p.getEstado(), p.getCodigoPedido()
             ));
             return "productos-editar";
         } else {

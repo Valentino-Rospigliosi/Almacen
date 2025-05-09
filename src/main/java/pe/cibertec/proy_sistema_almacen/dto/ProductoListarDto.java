@@ -6,5 +6,6 @@ public record ProductoListarDto(
         String descripcion,
         Integer stockActual,
         Integer stockMinimo,
-        String estado) {
+        String estado,
+        Integer codigoPedido) {
 }

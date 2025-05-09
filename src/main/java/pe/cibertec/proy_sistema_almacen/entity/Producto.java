@@ -23,6 +23,7 @@ public class Producto {
     private Integer stockActual;
     private Integer stockMinimo;
     private String estado;
+    private Integer codigoPedido;
 
 //    @OneToMany(mappedBy = "producto")
 //    private List<DetallePedido> detalles;

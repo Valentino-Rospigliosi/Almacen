@@ -23,7 +23,7 @@ public class MaintenanceProductoServiceImpl implements MaintenanceProductoServic
         List<ProductoListarDto> dtos = new ArrayList<>();
         productoRepository.findAll().forEach(p -> dtos.add(new ProductoListarDto(
                 p.getIdProducto(), p.getNombreProducto(), p.getDescripcion(),
-                p.getStockActual(), p.getStockMinimo(), p.getEstado()
+                p.getStockActual(), p.getStockMinimo(), p.getEstado(), p.getCodigoPedido()
         )));
         return dtos;
     }
@@ -32,14 +32,14 @@ public class MaintenanceProductoServiceImpl implements MaintenanceProductoServic
     public Optional<ProductoListarDto> listarProductoId(int id) {
         return productoRepository.findById(id).map(p -> new ProductoListarDto(
                 p.getIdProducto(), p.getNombreProducto(), p.getDescripcion(),
-                p.getStockActual(), p.getStockMinimo(), p.getEstado()
+                p.getStockActual(), p.getStockMinimo(), p.getEstado(), p.getCodigoPedido()
         ));
     }
 
     @Override
     public boolean agregarProducto(ProductoCrearDto dto) {
         Producto p = new Producto(null, dto.nombreProducto(), dto.descripcion(),
-                dto.stockActual(), dto.stockMinimo(), dto.estado());
+                dto.stockActual(), dto.stockMinimo(), dto.estado(),dto.codigoPedido());
         productoRepository.save(p);
         return true;
     }
@@ -53,6 +53,7 @@ public class MaintenanceProductoServiceImpl implements MaintenanceProductoServic
             p.setStockActual(dto.stockActual());
             p.setStockMinimo(dto.stockMinimo());
             p.setEstado(dto.estado());
+            p.setCodigoPedido(dto.codigoPedido());
             productoRepository.save(p);
             return true;
         }).orElse(false);
